@@ -18,15 +18,15 @@ def min_squares(train_data, test_data, norm):
     chart.show()
 
 
-#def lasso_l1(train_data, test_data, norm):
-#    train_X = train_data.drop('score', axis=1)
-#    train_Y = train_data['score']
-#    lasso = Lasso().fit(train_X, train_Y)
-#    prediction = lasso.predict(test_data.drop('score', axis = 1))
-#    mse = mean_squared_error(test_data['score'], prediction)
-#    chart = pgo.Figure(data=[pgo.Table(header=dict(values=['Metodo', 'Normalizado','MSE', 'rating','fav_genre','cast','advertising','length']),
-#                 cells=dict(values=['Lasso', norm, mse, lasso.coef_[0], lasso.coef_[1], lasso.coef_[2], lasso.coef_[3], lasso.coef_[4]]))])
-#    chart.show()
+def lasso_l1(train_data, test_data, norm):
+    train_X = train_data.drop('score', axis=1)
+    train_Y = train_data['score']
+    lasso = Lasso().fit(train_X, train_Y)
+    prediction = lasso.predict(test_data.drop('score', axis = 1))
+    mse = mean_squared_error(test_data['score'], prediction)
+    chart = pgo.Figure(data=[pgo.Table(header=dict(values=['Metodo', 'Normalizado','MSE', 'rating','fav_genre','cast','advertising','length']),
+                 cells=dict(values=['Lasso', norm, mse, lasso.coef_[0], lasso.coef_[1], lasso.coef_[2], lasso.coef_[3], lasso.coef_[4]]))])
+    chart.show()
 
 
 def Normalizar(data):
@@ -42,11 +42,11 @@ def main(train, test):
     train_data = pd.read_csv(train)
     test_data = pd.read_csv(test)
     min_squares(train_data, test_data, 'No')
-#    lasso_l1(train_data, test_data, 'No')
+    lasso_l1(train_data, test_data, 'No')
     ntrain_data = Normalizar(train_data)
     ntest_data = Normalizar(test_data)
     min_squares(ntrain_data, ntest_data, 'Si')
-#    lasso_l1(ntrain_data, ntest_data, 'Si')
+    lasso_l1(ntrain_data, ntest_data, 'Si')
 
 if __name__ == "__main__":
     train = sys.argv[1]
