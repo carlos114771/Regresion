@@ -11,8 +11,11 @@ from matplotlib.colors import ListedColormap
 def random_forest(test,train):
     data_train= pd.read_csv(train)
     data_test=pd.read_csv(test)
+    X= data_train.iloc[:[2,3]].values
+    Y= data_test.iloc[:, 4].values
 
     X_Train, X_Test, Y_Train, Y_Test = train_test_split(X, Y, test_size = 0.25, random_state = 0)
+    
     scalar_X=StandardScaler()
     X_Train=scalar_X.fit_transform(X_Train)
     X_Test=scalar_X.transform(X_Test)
@@ -25,3 +28,7 @@ def random_forest(test,train):
     Y_pred = classifier.predict(X_Test)
 
     matriz_cunfusion=confusion_matrix(Y_Test,Y_pred)
+
+    X_set, Y_set = X_Train,Y_Train
+
+    
